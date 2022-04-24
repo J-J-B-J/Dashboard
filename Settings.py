@@ -6,7 +6,6 @@ import os
 class Settings:
     """A class to manage settings"""
     def __init__(self):
-        self.dark = True
         try:
             with open("UserData/UserData.json") as open_file:
                 self.user_data = json.load(open_file)

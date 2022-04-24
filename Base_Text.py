@@ -14,10 +14,8 @@ class BaseText:
         self.dash = dash
         self.screen = dash.screen
         self.screen_rect = dash.screen.get_rect()
-        if self.settings.dark:
-            self.text_colour = (255, 255, 255)
-        else:
-            self.text_colour = (0, 0, 0)
+        self.text_colour = (22, 112, 240)
+        self.bg_colour = (200, 200, 200)
 
         self.window_size = pygame.display.get_window_size()
         self.window_x = self.window_size[0]
@@ -28,7 +26,7 @@ class BaseText:
         self.time_rect = None
 
         self.text_image = self.font.render(self.text, True, self.text_colour,
-                                           self.dash.bg_colour)
+                                           self.bg_colour)
 
         self.text_rect = self.text_image.get_rect()
 
@@ -41,7 +39,7 @@ class BaseText:
     def prep_me(self):
         """Make an image of the text"""
         self.text_image = self.font.render(self.text, True, self.text_colour,
-                                           self.dash.bg_colour)
+                                           self.bg_colour)
 
         self.text_rect = self.text_image.get_rect()
 

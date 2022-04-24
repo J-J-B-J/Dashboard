@@ -55,7 +55,7 @@ def get_date():
     else:
         full_day = str(day) + "th"
     full_month = month_names[month]
-    date = f"{full_day} of {full_month}"
+    date = f" {full_day} of {full_month} "
     return date
 
 

@@ -7,7 +7,7 @@ import Settings
 
 def temp_to_real_temp(temp):
     """Turn a temp value into the real value"""
-    return round(1.447610490128196 * temp - 406.848621627794557, 1)
+    return round(1.7611 * temp - 492.19, 1)
 
 
 def get_weather():
@@ -30,8 +30,25 @@ def get_weather():
 def get_rain():
     """Get how much rain there is"""
     try:
-        rain = get_weather()['precipitation_probability']
+        try:
+            rain = int(get_weather()['rain']['1h'] * 100)
+        except KeyError:
+            rain = None
+        try:
+            rain2 = int(get_weather()['rain']['2h'] * 100)
+        except KeyError:
+            rain2 = None
+        try:
+            rain3 = int(get_weather()['rain']['3h'] * 100)
+        except KeyError:
+            rain3 = None
         if rain:
+            if rain2:
+                if rain3:
+                    return f"{rain + rain2 + rain3}% Rain"
+                return f"{rain + rain2}% Rain"
+            if rain3:
+                return f"{rain + rain3}% Rain"
             return f"{rain}% Rain"
         else:
             return "No Rain"
@@ -51,19 +68,18 @@ def get_temp():
         return "ERROR"
 
 
-def get_cloudiness():
-    """Get how many clouds there are"""
+def get_status():
+    """Get the detailed status"""
     try:
-        clouds = get_weather()['clouds']
-        return f"{clouds}% Clouds"
+        return str(get_weather()['detailed_status']).title()
     except TypeError:
-        return "ERROR"
+        return "Nwtwork Error!"
 
 
 def get_all():
     """Get all weather values"""
     if get_weather():
-        weather = f"{get_temp()}  |  {get_rain()}  |  {get_cloudiness()} "
+        weather = f" {get_status()}  |  {get_temp()}  |  {get_rain()} "
         if "ERROR" in weather:
             return "Network Error! Could not get weather forecast!"
         else:
