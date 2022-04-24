@@ -20,7 +20,7 @@ class BaseText:
         self.window_size = pygame.display.get_window_size()
         self.window_x = self.window_size[0]
         self.window_y = self.window_size[1]
-        font_size = int(self.window_y / 15)
+        font_size = int(self.window_y / 14)
         self.font = pygame.font.SysFont(None, font_size)
         self.time_image = None
         self.time_rect = None
