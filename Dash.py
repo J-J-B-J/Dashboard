@@ -4,7 +4,7 @@ from sys import exit
 import time
 
 import Settings
-import Time
+import Date_Time
 import Weather
 
 
@@ -26,13 +26,13 @@ class Dashboard:
         else:
             self.bg_colour = (238, 238, 238)
 
-        self.time = Time.Time(self)
+        self.time = Date_Time.Time(self)
         self.weather = Weather.Weather(self)
 
     def run(self):
         """Run the main loop for the dashboard."""
         change = True
-        old_time = Time.get_time()
+        old_time = Date_Time.get_date_time()
         old_weather = self.weather.refresh()
         weather_check_time = time.time()
 
@@ -46,7 +46,7 @@ class Dashboard:
                         pygame.quit()
                         exit()
 
-            current_time = Time.get_time()
+            current_time = Date_Time.get_date_time()
             if current_time != old_time:
                 old_time = current_time
                 change = True
