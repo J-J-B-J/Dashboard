@@ -15,9 +15,9 @@ class BaseText:
         self.screen = dash.screen
         self.screen_rect = dash.screen.get_rect()
         if self.settings.dark:
-            self.text_colour = (238, 238, 238)
+            self.text_colour = (255, 255, 255)
         else:
-            self.text_colour = (50, 50, 50)
+            self.text_colour = (0, 0, 0)
 
         self.window_size = pygame.display.get_window_size()
         self.window_x = self.window_size[0]

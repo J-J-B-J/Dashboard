@@ -22,9 +22,9 @@ class Dashboard:
         pygame.display.set_caption("Dashboard")
         pygame.mouse.set_visible(False)
         if self.settings.dark:
-            self.bg_colour = (50, 50, 50)
+            self.bg_colour = (0, 0, 0)
         else:
-            self.bg_colour = (238, 238, 238)
+            self.bg_colour = (255, 255, 255)
 
         self.time = Date_Time.Time(self)
         self.weather = Weather.Weather(self)
