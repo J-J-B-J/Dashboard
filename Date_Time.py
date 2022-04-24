@@ -12,7 +12,10 @@ def get_time():
     Get a neatly formatted time
     :return: formatted time
     """
-    time = str(dt.now())
+    try:
+        time = str(dt.now())
+    except Exception:
+        return "Connection Error!"
     time = time[11:16]
     time = time.lstrip('0')
     hour = time[:2].rstrip(':')
@@ -34,7 +37,10 @@ def get_date():
     Get a neatly formatted time
     :return: formatted time
     """
-    date = str(dt.now())
+    try:
+        date = str(dt.now())
+    except Exception:
+        return "Connection Error!"
     month = date[5:7]
     day = date[8:10]
     month = month.lstrip("0")
@@ -54,6 +60,10 @@ def get_date():
 
 
 def get_date_time():
+    """
+    Get the date and the time in one lot
+    :return: date and time, formatted
+    """
     return get_date() + " | " + get_time()
 
 
