@@ -37,6 +37,7 @@ class Dashboard:
         weather_check_time = time.time()
 
         while True:
+            time.sleep(5)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
