@@ -2,6 +2,7 @@
 from datetime import datetime as dt
 
 import pygame.font
+import time as current_time
 
 import Base_Text
 
@@ -32,9 +33,14 @@ class Time(Base_Text.BaseText):
     """A class to draw the time to the screen"""
     def __init__(self, dash):
         super().__init__(dash)
+        self.last_sound_played = current_time.time()
 
     def refresh(self):
         """Refresh the time"""
         self.text = get_time()
+        if self.text[2:4] == "00" and current_time.time() >= \
+                self.last_sound_played + 120:
+            pygame.mixer.music.load("C Major.mp3")
+            pygame.mixer.music.play()
         self.text_rect.left = self.screen_rect.left + int(self.window_x / 256)
         self.text_rect.top = self.screen_rect.top + int(self.window_y / 160)
