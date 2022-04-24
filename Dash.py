@@ -68,6 +68,7 @@ class Dashboard:
                 time.sleep(10)
 
         except KeyboardInterrupt:
+            pygame.quit()
             sys.exit()
 
 
