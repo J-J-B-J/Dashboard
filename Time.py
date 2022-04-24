@@ -16,7 +16,11 @@ def get_time():
     time = time.lstrip('0')
     hour = time[:2].rstrip(':')
     hour = int(hour)
-    if hour < 13:
+    if 0 < hour < 12:
+        time += " am"
+    elif hour == 12:
+        time += " pm"
+    elif hour == 0:
         time += " am"
     else:
         time = str(int(time[:2]) - 12) + time[2:]

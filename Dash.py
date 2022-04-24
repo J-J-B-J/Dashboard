@@ -1,6 +1,7 @@
 """Main program for dash."""
 import pygame
 from sys import exit
+import time
 
 import Settings
 import Time
@@ -18,6 +19,8 @@ class Dashboard:
         self.screen = pygame.display.set_mode(self.screen_size)
         pygame.display.toggle_fullscreen()
         pygame.display.set_allow_screensaver(False)
+        pygame.display.set_caption("Dashboard")
+        pygame.mouse.set_visible(False)
         if self.settings.dark:
             self.bg_colour = (50, 50, 50)
         else:
@@ -31,6 +34,7 @@ class Dashboard:
         change = True
         old_time = Time.get_time()
         old_weather = self.weather.refresh()
+        weather_check_time = time.time()
 
         while True:
             for event in pygame.event.get():
@@ -42,15 +46,17 @@ class Dashboard:
                         pygame.quit()
                         exit()
 
-            time = Time.get_time()
-            if time != old_time:
-                old_time = time
+            current_time = Time.get_time()
+            if current_time != old_time:
+                old_time = current_time
                 change = True
 
-            weather = self.weather.refresh()
-            if weather != old_weather:
-                old_weather = weather
-                change = True
+            if time.time() >= weather_check_time + 600:
+                weather_check_time = time.time()
+                weather = self.weather.refresh()
+                if weather != old_weather:
+                    old_weather = weather
+                    change = True
 
             if change:
                 self.screen.fill(self.bg_colour)
